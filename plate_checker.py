@@ -10,9 +10,9 @@ class LicensePlateData:
     location: str
 
 class LicensePlateChecker:
-    def __init__(self, url: str, headers: dict):
-        self.url = url
-        self.headers = headers
+    def __init__(self, url: str = None, headers: dict = None):
+        self.url = url or "https://opendata.hsc.gov.ua/check-leisure-license-plates/"
+        self.headers = headers or {}
 
     def get_csrf_token(self) -> str:
         response = requests.get(self.url, headers=self.headers, verify=False)
@@ -42,14 +42,11 @@ class LicensePlateChecker:
 
         return []
 
-# usage
-url = "https://opendata.hsc.gov.ua/check-leisure-license-plates/"
-headers = {
-    # headers go here
-}
-checker = LicensePlateChecker(url, headers)
-data = checker.get_plate_data('26', 'Весь регіон', 'electric_car', '2412')
-for d in data:
-    print(f"Номерний знак: {d.number}")
-    print(f"Ціна за комбінацію: {d.price}")
-    print(f"Місце знаходження: {d.location}\n")
+
+if __name__ == "__main__":
+    checker = LicensePlateChecker()
+    data = checker.get_plate_data('26', 'Весь регіон', 'electric_car', '5267')
+    for d in data:
+        print(f"Номерний знак: {d.number}")
+        print(f"Ціна за комбінацію: {d.price}")
+        print(f"Місце знаходження: {d.location}\n")
