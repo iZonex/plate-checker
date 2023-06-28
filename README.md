@@ -27,11 +27,7 @@ pip install requests
 ```python
 from plate_checker import LicensePlateChecker
 
-url = "https://opendata.hsc.gov.ua/check-leisure-license-plates/"
-headers = {
-    # headers go here
-}
-checker = LicensePlateChecker(url, headers)
+checker = LicensePlateChecker()
 data = checker.get_plate_data('26', 'Весь регіон', 'electric_car', '2412')
 for d in data:
     print(f"Номерний знак: {d.number}")
@@ -39,4 +35,4 @@ for d in data:
     print(f"Місце знаходження: {d.location}\n")
 ```
 
-У цьому прикладі створюється об'єкт `LicensePlateChecker` з вказаними URL-адресою та заголовками. Потім викликається метод `get_plate_data`, який повертає список об'єктів `LicensePlateData`, кожен з яких містить інформацію про конкретний номерний знак. Ця інформація потім виводиться на екран.
+У цьому прикладі створюється об'єкт `LicensePlateChecker`. Потім викликається метод `get_plate_data`, який повертає список об'єктів `LicensePlateData`, кожен з яких містить інформацію про конкретний номерний знак. Ця інформація потім виводиться на екран.
